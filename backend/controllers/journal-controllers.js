@@ -63,20 +63,24 @@ const getEntriesByUserId = async (req, res, next) => {
 };
 
 const createEntry = async (req, res, next) => {
+  console.log("CreateEntry triggered"); // start of function
+  console.log("Request body =", req.body); // important variable
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return next(
-      new HttpError("Invalid inputs passed, please check your data.", 422)
-    );
+    console.log("Validation failed =", errors.array()); // branch check
+    return next(new HttpError("Invalid inputs passed, please check your data.", 422));
   }
 
   const { headline, journalText, locationName, author } = req.body;
+  console.log("Extracted fields =", { headline, journalText, locationName, author }); // before geocode
 
   let coordinates;
-
   try {
-    coordinates = await getCoordsForAddress(locationName);
+    coordinates = await getCoordsForAddress(locationName); // suspected line
+    console.log("Coordinates received =", coordinates); // after geocode
   } catch (error) {
+    console.error("Geocoding error =", error); // error branch
     return next(error);
   }
 
@@ -87,21 +91,25 @@ const createEntry = async (req, res, next) => {
     photo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpPkm3Hhfm2fa7zZFgK0HQrD8yvwSBmnm_Gw&s",
     locationName,
     coordinates: {
-        latitude: coordinates.lat, 
-        longitude: coordinates.lng
+      latitude: coordinates.lat,
+      longitude: coordinates.lng,
     },
     author,
   });
+  console.log("Entry object before save =", createdEntry); // before save
 
   try {
-    await createdEntry.save();
+    await createdEntry.save(); // suspected line
+    console.log("Entry saved successfully"); // after save
   } catch (err) {
+    console.error("Error saving entry =", err); // error branch
     const error = new HttpError("Creating entry failed, please try again", 500);
     return next(error);
   }
 
   res.status(201).json({ entry: createdEntry });
 };
+
 
 const updateEntry = async (req, res, next) => {
   const errors = validationResult(req);
