@@ -21,6 +21,8 @@ const UpdateEntry = () => {
   const [loadedEntry, setLoadedEntry] = useState();
   const entryId = useParams().entryId; // Assumes route is /journal/:entryId
   const navigate = useNavigate();
+  
+
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -63,8 +65,14 @@ const UpdateEntry = () => {
 
   const entryUpdateSubmitHandler = async (event) => {
     event.preventDefault();
+    console.log("Submitting update…");   // log 1
+    console.log("Update request payload:", {
+      headline: formState.inputs.headline.value,
+      journalText: formState.inputs.journalText.value,
+    });   // log 2
+
     try {
-      await sendRequest(
+      const responseData = await sendRequest(
         `http://localhost:5005/api/journal/${entryId}`,
         "PATCH",
         JSON.stringify({
@@ -75,8 +83,14 @@ const UpdateEntry = () => {
           "Content-Type": "application/json",
         }
       );
+      console.log("Response received:", responseData);  // log 3
+      console.log("setIsLoading should be triggered here");  // log 4
+
       navigate("/" + auth.userId + "/journal");
-    } catch (err) {}
+      console.log("Navigating to journal list");   // log 5
+    } catch (err) {
+      console.error("Update error:", err);   // log 6
+    }
   };
 
   if (isLoading) {
