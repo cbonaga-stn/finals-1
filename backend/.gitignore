@@ -1,0 +1,95 @@
+# --- Node / Express ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json.*.backup
+
+# Runtime logs
+logs/
+*.log
+*.log.*
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage & test outputs
+coverage/
+.nyc_output/
+.junit/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Build artifacts & caches
+dist/
+build/
+.tmp/
+temp/
+tmp/
+.cache/
+.parcel-cache/
+.rollup.cache/
+.rpt2_cache/
+.esbuild/
+vite.svg
+
+# TypeScript
+*.tsbuildinfo
+
+# Env files (keep .env.example tracked)
+.env
+.env.*
+!.env.example
+
+# Local data / uploads (adjust as needed)
+uploads/
+data/
+*.sqlite
+*.db
+*.db-journal
+
+# OS / Editor junk
+.DS_Store
+.DS_Store?
+Icon?
+Thumbs.db
+ehthumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml
+
+# Docker & container artifacts
+docker-compose.override.yml
+.docker/
+**/.env.docker
+**/.env.local.docker
+
+# Lint & tool caches
+.eslintcache
+.stylelintcache
+.prettier-cache
+.husky/_/_
+
+# PM2
+.pm2/
+
+# Next.js / React (if you add a frontend later)
+.next/
+out/
+.svelte-kit/
+.nuxt/
+*.map
+
+# Static site hosts
+.vercel/
+.netlify/
+
+# Ignore npm lockfile
+package-lock.json

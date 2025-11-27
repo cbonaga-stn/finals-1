@@ -1,0 +1,48 @@
+.place-form {
+  list-style: none;
+  margin: 2rem auto 3rem;
+  padding: 2rem 2.5rem;
+  width: 100%;
+  max-width: 40rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Optional: If you add headings inside the form later */
+.place-form__title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+}
+
+.place-form__subtitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+/* Space out form controls from shared Input component */
+.place-form .form-control {
+  margin-bottom: 0.75rem;
+}
+
+/* Align submit button nicely */
+.place-form button {
+  align-self: flex-end;
+  margin-top: 0.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  .place-form {
+    margin: 1.5rem auto 2.5rem;
+    padding: 1.5rem 1.25rem;
+    border-radius: 0.9rem;
+  }
+}

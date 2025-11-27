@@ -1,0 +1,63 @@
+.auth-page {
+  width: 100%;
+  min-height: calc(100vh - 5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 var(--page-padding-x, 1.25rem);
+}
+
+/* Card itself */
+.authentication {
+  width: 100%;
+  max-width: 26rem;
+  margin: 0;
+  text-align: left;
+}
+
+.authentication h2 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--color-text-main, #111827);
+}
+
+.authentication__header {
+  text-align: center;
+  color: var(--color-text-main, #111827);
+}
+
+.authentication hr {
+  border: none;
+  border-top: 1px solid rgba(148, 163, 184, 0.4);
+  margin: 0.75rem 0 1.25rem;
+}
+
+.authentication form {
+  margin-bottom: 1.1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.authentication form .form-control:last-of-type {
+  margin-bottom: 0.8rem;
+}
+
+.authentication button[type="submit"] {
+  width: 100%;
+  justify-content: center;
+}
+
+.authentication > .button.button--inverse {
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.3rem;
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    min-height: calc(100vh - 4.5rem);
+    padding: 0 1rem;
+  }
+}

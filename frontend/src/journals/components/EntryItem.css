@@ -1,0 +1,132 @@
+.place-item {
+  list-style: none;
+  margin: 1.5rem 0;
+}
+
+.place-item__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
+  transition: transform 150ms ease, box-shadow 150ms ease,
+    border-color 150ms ease;
+}
+
+.place-item__content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 55px rgba(15, 23, 42, 0.12);
+  border-color: #2563eb;
+}
+
+.place-item__image {
+  width: 100%;
+  max-height: 260px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #eff6ff, #e0f2fe);
+}
+
+.place-item__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 400ms ease, filter 400ms ease;
+}
+
+.place-item__content:hover .place-item__image img {
+  transform: scale(1.04);
+  filter: saturate(1.05);
+}
+
+.place-item__info {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+}
+
+.place-item__info h2 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  font-weight: 600;
+  color: #111827;
+}
+
+.place-item__info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.place-item__info p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #6b7280;
+}
+
+.place-item__actions {
+  padding: 0.9rem 1.5rem 1.1rem;
+  border-top: 1px solid #e5e7eb;
+  background: linear-gradient(to right, #f9fafb, #f3f4f6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.place-item__actions button,
+.place-item__actions a {
+  margin: 0;
+}
+
+.place-item__modal-content {
+  padding: 0;
+}
+
+.place-item__modal-actions {
+  text-align: right;
+}
+
+.map-container {
+  height: 16rem;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .place-item__info {
+    padding: 1rem 1.1rem;
+  }
+
+  .place-item__actions {
+    padding: 0.85rem 1.1rem 1rem;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .place-item__content {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .place-item__image {
+    flex: 0 0 320px;
+    max-height: none;
+  }
+
+  .place-item__info {
+    flex: 1 1 auto;
+    padding: 1.75rem 2rem;
+  }
+
+  .place-item__actions {
+    padding: 1.1rem 1.75rem 1.25rem;
+    justify-content: flex-end;
+  }
+}

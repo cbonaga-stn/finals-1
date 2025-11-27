@@ -1,0 +1,18 @@
+.card {
+  margin: 0;
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-lg, 1rem);
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e5e7eb);
+  box-shadow: var(--shadow-soft, 0 18px 40px rgba(15, 23, 42, 0.12));
+  overflow: hidden;
+}
+
+/* Optional subtle variant for nested / secondary cards */
+.card.card--subtle {
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius-md, 0.75rem);
+  box-shadow: none;
+  border-color: rgba(226, 232, 240, 0.9);
+  background: #f9fafb;
+}
