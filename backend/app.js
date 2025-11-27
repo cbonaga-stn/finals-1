@@ -39,6 +39,8 @@ app.use((error, req, res, next) => {
   res.json({ message: error.message || "An unknown error occurred!" });
 });
 
+console.log("DB_URL from env:", process.env.DB_URL);
+
 mongoose
   .connect(process.env.DB_URL)
   .then(() => {

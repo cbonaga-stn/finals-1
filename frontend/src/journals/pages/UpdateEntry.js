@@ -65,7 +65,7 @@ const UpdateEntry = () => {
 
   const entryUpdateSubmitHandler = async (event) => {
     event.preventDefault();
-    console.log("Submitting update…");   // log 1
+    console.log("Submitting update…", entryId);   // log 1
     console.log("Update request payload:", {
       headline: formState.inputs.headline.value,
       journalText: formState.inputs.journalText.value,

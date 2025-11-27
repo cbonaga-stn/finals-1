@@ -129,24 +129,30 @@ const updateEntry = async (req, res, next) => {
   entry.journalText = journalText;
 
   try {
-  } catch (err) {
-    const error = new HttpError(
-      "Something went wrong, could not update entry.",
-      500
-    );
-    return next(error);
-  }
+  await entry.save(); // ✅ this actually writes the changes to the DB
+  console.log("Update successful for entry:", entryId); // debug log
+} catch (err) {
+  console.error("Error saving updated entry:", err); // debug log
+  const error = new HttpError(
+    "Something went wrong, could not update entry.",
+    500
+  );
+  return next(error);
+}
 
-  res.status(200).json({ entry: entry.toObject({ getters: true }) });
+res.status(200).json({ entry: entry.toObject({ getters: true }) });
 };
 
 const deleteEntry = async (req, res, next) => {
   const entryId = req.params.pid;
+  console.log("Delete request received for entry:", entryId); // start log
 
   let entry;
   try {
     entry = await Journal.findById(entryId);
+    console.log("Entry found:", entry); // after query log
   } catch (err) {
+    console.error("Error finding entry:", err); // error log
     const error = new HttpError(
       "Something went wrong, could not delete entry.",
       500
@@ -155,11 +161,15 @@ const deleteEntry = async (req, res, next) => {
   }
 
   if (!entry) {
+    console.log("No entry found for id:", entryId); // branch log
     return next(new HttpError("Could not find entry for this id.", 404));
   }
 
   try {
+    await entry.deleteOne(); // ✅ delete from DB
+    console.log("Entry deleted successfully:", entryId); // success log
   } catch (err) {
+    console.error("Error deleting entry:", err); // error log
     const error = new HttpError(
       "Something went wrong, could not delete entry.",
       500
