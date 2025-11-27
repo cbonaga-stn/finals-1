@@ -32,11 +32,14 @@ const getEntryById = async (req, res, next) => {
 
 const getEntriesByUserId = async (req, res, next) => {
   const userId = req.params.uid;
+  console.log("Fetching entries for user:", userId);   // log 1
 
   let entries;
   try {
     entries = await Journal.find({ author: userId });
+    console.log("Database result:", entries);   // log 2
   } catch (err) {
+    console.error("Error during DB query:", err);   // log 3
     const error = new HttpError(
       "Fetching entries failed, please try again later",
       500
@@ -45,7 +48,14 @@ const getEntriesByUserId = async (req, res, next) => {
   }
 
   if (!entries || entries.length === 0) {
+    console.log("No entries found for user:", userId);   // log 4
+    return res.json({ entries: [] });   // only return empty if truly empty
   }
+
+  console.log(
+    "Does this userId match entry.author?",
+    entries[0]?.author?.toString() === userId
+  ); // log 5
 
   res.json({
     entries: entries.map((entry) => entry.toObject({ getters: true })),
