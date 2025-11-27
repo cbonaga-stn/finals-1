@@ -25,7 +25,7 @@ const signup = async (req, res, next) => {
       new HttpError("Invalid inputs passed, please check your data.", 422)
     );
   }
-  const { name, email, password, places } = req.body;
+  const { firstName, lastName, mobileNumber, email, password, places } = req.body;   // Added firstName, lastName, and mobileNumber fields
 
   let existingUser;
   try {
@@ -46,8 +46,10 @@ const signup = async (req, res, next) => {
     return next(error);
   }
 
-  const createdUser = new User({
-    name,
+  const createdUser = new User({   // Added firstName, lastName, and mobileNumber fields
+    firstName,
+    lastName,
+    mobileNumber,
     email,
     image:
       "https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?semt=ais_incoming&w=740&q=80",
@@ -94,6 +96,9 @@ const login = async (req, res, next) => {
     message: "Logged in!",
     userId: existingUser.id,
     email: existingUser.email,
+    firstName: existingUser.firstName,   // Added firstName to login response
+    lastName: existingUser.lastName,     // Added lastName to login response  
+    mobileNumber: existingUser.mobileNumber, // Added mobileNumber to login response
   });
 };
 
