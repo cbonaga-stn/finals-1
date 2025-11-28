@@ -22,18 +22,6 @@ const Auth = () => {
 
   const [formState, inputHandler, setFormData] = useForm(
   {
-    firstName: {
-      value: "",
-      isValid: false,
-    },
-    lastName: {
-      value: "",
-      isValid: false,
-    },
-    mobileNumber: {
-      value: "",
-      isValid: false,
-    },
     email: {
       value: "",
       isValid: false,
@@ -51,6 +39,8 @@ const Auth = () => {
     if (!isLoginMode) {
       setFormData(
         {
+          ...formState.inputs,
+          name: undefined,
           email: formState.inputs.email,
           password: formState.inputs.password,
         },
@@ -59,18 +49,7 @@ const Auth = () => {
     } else {
       setFormData(
         {
-          firstName: {
-            value: "",
-            isValid: false,
-          },
-          lastName: {
-            value: "",
-            isValid: false,
-          },
-          mobileNumber: {
-            value: "",
-            isValid: false,
-          },
+          ...formState.inputs,
           email: formState.inputs.email,
           password: formState.inputs.password,
         },
@@ -90,9 +69,6 @@ const Auth = () => {
           "http://localhost:5005/api/users/login",
           "POST",
           JSON.stringify({
-            firstName: formState.inputs.firstName.value,
-            lastName: formState.inputs.lastName.value,
-            mobileNumber: formState.inputs.mobileNumber.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
