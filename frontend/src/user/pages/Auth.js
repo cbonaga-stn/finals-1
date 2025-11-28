@@ -21,40 +21,63 @@ const Auth = () => {
   const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
-    {
-      email: {
-        value: "",
-        isValid: false,
-      },
-      password: {
-        value: "",
-        isValid: false,
-      },
+  {
+    firstName: {
+      value: "",
+      isValid: false,
     },
-    false
-  );
+    lastName: {
+      value: "",
+      isValid: false,
+    },
+    mobileNumber: {
+      value: "",
+      isValid: false,
+    },
+    email: {
+      value: "",
+      isValid: false,
+    },
+    password: {
+      value: "",
+      isValid: false,
+    },
+  },
+  false
+);
+
 
   const switchModeHandler = () => {
     if (!isLoginMode) {
       setFormData(
         {
-          ...formState.inputs,
-          name: undefined,
+          email: formState.inputs.email,
+          password: formState.inputs.password,
         },
         formState.inputs.email.isValid && formState.inputs.password.isValid
       );
     } else {
       setFormData(
         {
-          ...formState.inputs,
-          name: {
+          firstName: {
             value: "",
             isValid: false,
           },
+          lastName: {
+            value: "",
+            isValid: false,
+          },
+          mobileNumber: {
+            value: "",
+            isValid: false,
+          },
+          email: formState.inputs.email,
+          password: formState.inputs.password,
         },
         false
       );
     }
+
     setIsLoginMode((prevMode) => !prevMode);
   };
 
@@ -67,6 +90,9 @@ const Auth = () => {
           "http://localhost:5005/api/users/login",
           "POST",
           JSON.stringify({
+            firstName: formState.inputs.firstName.value,
+            lastName: formState.inputs.lastName.value,
+            mobileNumber: formState.inputs.mobileNumber.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
@@ -82,7 +108,9 @@ const Auth = () => {
           "http://localhost:5005/api/users/signup",
           "POST",
           JSON.stringify({
-            name: formState.inputs.name.value,
+            firstName: formState.inputs.firstName.value,
+            lastName: formState.inputs.lastName.value,
+            mobileNumber: formState.inputs.mobileNumber.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value,
           }),
@@ -104,15 +132,35 @@ const Auth = () => {
         <hr />
         <form onSubmit={authSubmitHandler}>
           {!isLoginMode && (
-            <Input
-              element="input"
-              id="name"
-              type="text"
-              label="Name"
-              validators={[VALIDATOR_REQUIRE()]}
-              errorText="Please enter a name."
-              onInput={inputHandler}
-            />
+            <>
+              <Input
+                element="input"
+                id="firstName"
+                type="text"
+                label="First Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your first name."
+                onInput={inputHandler}
+              />
+              <Input
+                element="input"
+                id="lastName"
+                type="text"
+                label="Last Name"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your last name."
+                onInput={inputHandler}
+              />
+              <Input
+                element="input"
+                id="mobileNumber"
+                type="text"
+                label="Mobile Number"
+                validators={[VALIDATOR_REQUIRE()]}
+                errorText="Please enter your mobile number."
+                onInput={inputHandler}
+              />
+            </>
           )}
           <Input
             element="input"
